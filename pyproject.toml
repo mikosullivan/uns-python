@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "uns_mikosullivan_001"
+version = "0.0.1"
+authors = [
+  { name="Mike O'Sullivan", email="mike@idocs.com" },
+]
+description = "A package for implementing universal namespaces"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/mikosullivan/example_package_mikosullivan_001"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "pkg/*.py",
+  "/tests",
+  "/src",
+]
+exclude = [
+  "*.json",
+  "pkg/_compat.py",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/example_package_mikosullivan"]

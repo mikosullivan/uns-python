@@ -1,5 +1,5 @@
 """
-UNS - Uniform Namespace
+UNS - Universal Namespace
 
 This module provides a class to parse URIs into UNS.
 """
@@ -7,30 +7,27 @@ This module provides a class to parse URIs into UNS.
 import urllib.parse
 
 class UNS:
-
   def __init__(self, raw):
     """
-    Initialize the UNS object
+    Initialize the UNS object.
     
     Parameters:
-      raw (str): The raw URI or namespace string
+      raw (str|uri): URI object or string
     """
     
-    # if a URI was passed in, use that
+    # if a URI was passed in, parse it
     if isinstance(raw, urllib.parse.ParseResult):
-      self.__uri = raw  
+      raw = urllib.parse.urlunparse(raw)
     
-    # else attempt to parse the param
-    else:    
-      if not raw.startswith(("http://", "https://")):  
-        # add scheme if missing
-        raw = "https://" + raw
-        
-      # replace namespace delimiter
-      raw = raw.replace("~", "/")  
-      
-      # Parse the URI
-      self.__uri = urllib.parse.urlparse(raw)
+    # add scheme if missing
+    if not raw.startswith(("http://", "https://")):  
+      raw = "https://" + raw
+    
+    # replace namespace delimiter
+    raw = raw.replace("~", "/")  
+    
+    # Parse the URI
+    self.__uri = urllib.parse.urlparse(raw)
 
   def namespace(self):
     """
@@ -51,6 +48,9 @@ class UNS:
     """
 
     return self.__uri
+
+  def uri_str(self):
+    return urllib.parse.urlunparse(self.uri())
 
   def filename(self):
     """
