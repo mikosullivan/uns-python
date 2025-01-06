@@ -18,7 +18,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mikosullivan/example_package_mikosullivan_001"
+Homepage = "https://github.com/mikosullivan/uns-python"
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -32,4 +32,5 @@ exclude = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/example_package_mikosullivan"]
+packages = ["src/uns"]
+
